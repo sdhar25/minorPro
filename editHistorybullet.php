@@ -1,0 +1,59 @@
+<?php
+include ("adminHeader.php");
+include("connection.php");
+error_reporting(0);
+?>
+<?php
+$_GET['id'];
+$_GET['txt'];
+?>
+
+<div class="maintext" id="maintext">
+	<div class="container">
+		<h1 class="display-5 text-center">"Bulleted Text" Details</h1>
+		 <form action="" method="GET">
+		 	<div class="col-md-6">
+		 		<div class="form-group">
+		 			<label><b>ID</b></label>
+		 			<input type="text" name="id" class="form-control" required="" readonly="true" value="<?php echo $_GET['id']?>">
+		 		</div>
+		 	</div>
+		 	<div class="col-md-6">
+		 		<div class="form-group">
+		 			<label><b>Bulleted Text:- </b></label>
+		 			<textarea class="form-control" rows="1"  name="midtext" required=""><?php echo (nl2br($_GET['txt']));?></textarea>
+		 		</div>
+		 		<div class="col-md-6">
+		 		<input type="submit"  class="btn btn-primary" name="submit" value="UPDATE"> 
+		 	    </div>
+		 	</div>
+		 	
+		 </form>
+		
+	</div>
+	
+</div>
+<?php
+   if($_GET['submit'])
+   {
+     $id=$_GET['id'];
+     $midtext=$_GET['midtext'];
+     $query="UPDATE historybullet SET midtext='$midtext' WHERE id=$id ";
+     $data=mysqli_query($con,$query);
+     if($data)
+     {
+         echo "<script>
+               alert('Data updated');
+               window.location.assign('adminhistory.php');
+         </script>";
+     }
+     else
+     {
+        echo "<script> alert('Something Went Wrong');</script>";
+     }
+   }
+   else
+   {
+
+   }
+?>
